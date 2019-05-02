@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html th:lang="${con.LANG}" xmlns:th="http://www.thymeleaf.org" th:dir="${con.DIR}">
+<head th:replace="layout :: head(${con.MAIN_HEADER})"></head>
+<body>
+
+<div th:replace="layout :: top"></div>
+
+<div class="container-fluid pt-3">
+<div class="row">
+<div class="col-md-8">
+<form class="p-3 box-content" action="/profile" th:object="${userProfile}" method="POST" enctype="multipart/form-data">
+<h5 class="text-success font-weight-light" th:text="@{'Edit '+${user.getFullName()+' profile'}}"></h5>
+<div class="row">
+<div class="col-md-9 mb-2">
+<div class="alert alert-dismissable alert-danger p-2" th:if="${updateError != null}">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p class="p-0 m-0" th:text="${updateError}"></p>
+</div>
+<div class="alert alert-dismissable alert-success p-2" th:if="${updateSuccess != null}">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p class="p-0 m-0" th:text="${updateSuccess}"></p>
+</div>
+  <div class="form-group">
+    <label>Email</label>
+    <input type="text" th:field="*{email}" class="form-control" placeholder="Email"/>
+    <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger mb-0"></label>
+  </div>
+  <div class="row">
+  <div class="col-md-6">
+  <div class="form-group">
+    <label>First Name</label>
+    <input type="text" th:field="*{firstName}" class="form-control" placeholder="First Name"/>
+    <label th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger mb-0"></label>
+  </div>
+  </div>
+  <div class="col-md-6">
+  <div class="form-group">
+    <label>Last Name</label>
+    <input type="text" th:field="*{lastName}" class="form-control" placeholder="Last Name"/>
+    <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger mb-0"></label>
+  </div>
+  </div>
+  </div>
+  <label class="labelText">User photo</label><br/>
+  <div class="col-md-6 custom-file">
+  	<input id="userImage" aria-describedby="User Image" accept="image/*" name="userImage" type="file" class="custom-file-input"/>
+  	<label class="custom-file-label" for="userImage">Choose file</label>
+  </div>
+</div>
+<div class="col-md-3">
+<div class="col-md-12 p-0 mt-2 mb-2">
+  		<img th:if="${userProfile.image != null}" class="rounded img-fluid" th:src="@{'data:image/png;base64,'+${user.userImage()}}"/>
+  		<img th:if="${userProfile.image == null}" class="rounded img-fluid" th:src="@{/materialize/img/user.jpg}"/>
+  </div>
+</div>
+<button type="submit" class="btn btn-primary mt-2 ml-3 mr-3">Edit Profile</button>
+</div>
+</form>
+</div>
+<div class="col-md-4">
+<form id="change-pass" class="p-3 box-content" action="/change-pass" method="POST">
+<h5 class="text-success font-weight-light" th:text="@{'Change Password'}"></h5>
+<div class="row">
+<div class="col-md-12 mb-2">
+<div class="alert alert-dismissable alert-danger p-2" th:if="${changePassError != null}">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p class="p-0 m-0" th:text="${changePassError}"></p>
+</div>
+<div class="alert alert-dismissable alert-success p-2" th:if="${changePassSuccess != null}">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p class="p-0 m-0" th:text="${changePassSuccess}"></p>
+</div>
+  <div class="row">
+  <div class="col-md-6">
+        <label>Old Password</label>
+   		<input type="password" name="oldPass" class="form-control" placeholder="Old Password"/>
+  </div>
+  </div>
+  <div class="row">
+  <div class="col-md-6 mt-3">
+        <label>New Password</label>
+   		<input type="password" name="newPass" class="form-control" placeholder="New Password"/>
+  </div>
+  <div class="col-md-6 mt-3">
+  		<label>Confirm New Password</label>
+   		<input type="password" name="confirmNewPass" class="form-control" placeholder="Confirm Password"/>
+  </div>
+</div>
+</div>
+<button type="submit" class="btn btn-primary mt-2 ml-3 mr-3">Change Password</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+
+<br/>
+<div th:replace="layout :: bottom"></div>
+<div th:replace="layout :: js"></div>
+<script>
+	$(".custom-file-input").on("change", function() {
+	  var fileName = $(this).val().split("\\").pop();
+	  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+	});
+</script>
+</body>
+</html>

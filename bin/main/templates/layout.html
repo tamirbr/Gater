@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(page_title)">
+
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <link rel="icon" th:href="@{/materialize/img/logoicon.png}" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/materialize/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/materialize/custom.css}"/>
+
+    <title th:text="${page_title}"></title>
+
+    <script type="text/javascript"></script>
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    
+	<meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="24940022634-pqpfdqmeksuofhqrrc9626mukv53p6l6.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+</head>
+<body>
+
+
+<!--===================================
+      TOP SITE MODAL
+    ====================================-->
+<div th:fragment="top" style="margin-bottom: 50px">
+<nav id="top" style="height: 50px" class="navbar navbar-expand-md navbar-light navbar-default fixed-top jumbotron-fluid pr-1 pl-1">
+<div class="container-fluid">
+  <a class="navbar-brand text-primary font-weight-bold" th:text="${con.SITE_NAME}" href="/"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse row" id="navbarNav">
+  <div class="col pr-0">
+  <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home</a>
+      </li>
+      <li th:if="${user != null}" class="nav-item active">
+        <a class="nav-link" href="/panel">Panel</a>
+      </li>
+      <li th:if="${user != null}" class="nav-item active d-md-none">
+        <a class="nav-link" href="/profile">Profile</a>
+      </li>
+      <div th:if="${user != null}" class="dropdown-divider d-md-none"></div>
+      <li th:if="${user != null}" class="nav-item active d-md-none">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+      <div class="col"></div>
+      <div class="d-none d-lg-block ml-2 mr-2" style="width: 1px; height: 40px; background-color: #d6d6d6;"></div>
+      <li class="nav-item">
+        <a class="nav-link" th:if="${user == null or user.email == null}" href="/login">Login</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-auto pl-0 d-none d-lg-block dropleft">
+	<a th:if="${user != null}" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<label class="m-2" th:text="${user.getFullName()}"></label>
+		<img th:if="${user.image != null}" class="user-icon" th:src="@{'data:image/png;base64,'+${user.userImage()}}"/>
+  		<img th:if="${user.image == null}" class="user-icon" th:src="@{/materialize/img/user.jpg}"/>
+  	</a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="/profile">Profile</a>
+    <a class="dropdown-item" href="/profile#change-pass">Change Password</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="/logout">Logout</a>
+  </div>
+  </div>    
+  </div>
+</div>
+</nav>
+</div>
+
+<!--===================================
+      END OFF TOP SITE MODAL
+    ====================================-->
+
+
+<!--===================================
+      FOOTER MODAL
+    ====================================-->
+
+<footer th:fragment="bottom" class="footer">
+    <div class="container text-center">
+        <br/>
+        <br/>
+    </div>
+</footer>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<div th:fragment="js">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+	<script th:inline="javascript">
+        $(window).scroll(function(){
+            $('nav').toggleClass('scrolled', $(this).scrollTop() > 50);
+            $('nav').toggleClass('scrolled', $(this).scrollTop() > 50);
+        });
+
+    </script>
+</div>
+</body>
+</html>

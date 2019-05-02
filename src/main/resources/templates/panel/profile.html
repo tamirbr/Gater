@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html th:lang="${con.LANG}" xmlns:th="http://www.thymeleaf.org" th:dir="${con.DIR}">
+<head th:replace="layout :: head(${con.MAIN_HEADER})"></head>
+<body>
+
+<div th:replace="layout :: top"></div>
+
+<div class="container-fluid pt-3">
+
+</div>
+
+<br/>
+<div th:replace="layout :: bottom"></div>
+<div th:replace="layout :: js"></div>
+</body>
+</html>

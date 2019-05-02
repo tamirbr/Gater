@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" dir="ltr">
+<head th:replace="layout :: head('error')"></head>
+<body>
+<style>
+    .app-error {
+        margin-top: 20px;
+        border: 1px solid #757575;
+        padding: 10px;
+        background-color: #ffffff;
+        border-radius: 6px;
+    }
+</style>
+
+<div class="container text-center">
+    <br/>
+    <h2 class="text-dark mb-3" th:text="|${#httpServletRequest.getAttribute('javax.servlet.error.status_code')} Error|">500 Error</h2>
+    <img th:src="@{/materialize/img/sad-face.png}"/>
+    <a href="/"><h4 class="text-dark mt-3">Return Site</h4></a>
+    
+</div>
+
+</body>
+</html>
