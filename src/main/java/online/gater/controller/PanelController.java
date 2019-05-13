@@ -20,8 +20,7 @@ public class PanelController {
     public String panelPage(Model model, HttpSession httpSession, HttpServletRequest request) {
         model.addAttribute("con",ConstantsEn.class);
         User user = LoggedInUser.getUser(SecurityContextHolder.getContext().getAuthentication());
-        model.addAttribute("user",user);
-        
+        model.addAttribute("user",user); 
         
         return "panel/index";
     }

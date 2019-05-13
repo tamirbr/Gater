@@ -50,8 +50,7 @@ public class UserController {
     // Register new user
     @RequestMapping(value = "/profile", method = RequestMethod.POST)
     public String editProfile(@Valid User userProfile, BindingResult result, RedirectAttributes redirectAttributes,
-    		@RequestParam(value = "userImage",required = false) MultipartFile userImage) {
-    	    	
+    		@RequestParam(value = "userImage",required = false) MultipartFile userImage) {  	
     	// Check for validation errors
     	if(Tools.hasFormPostErrors(result, redirectAttributes)) {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userProfile",result);
@@ -79,7 +78,6 @@ public class UserController {
     		@RequestParam(value = "oldPass",required = true) String oldPass,
     		@RequestParam(value = "newPass",required = true) String newPass,
     		@RequestParam(value = "confirmNewPass",required = true) String confirmNewPass) {
-    	    	
 		User user = LoggedInUser.getUser(SecurityContextHolder.getContext().getAuthentication());        
     	validatePassword(redirectAttributes, oldPass, newPass, confirmNewPass, user); 
     	if(redirectAttributes.getFlashAttributes().isEmpty() == false) {
