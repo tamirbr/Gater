@@ -41,7 +41,7 @@ dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
     // https://mvnrepository.com/artifact/mysql/mysql-connector-java
     //compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
-    compile 'com.h2database:h2:1.4.190'
+    compile 'com.h2database:h2:1.4.190'    
 
 }
 

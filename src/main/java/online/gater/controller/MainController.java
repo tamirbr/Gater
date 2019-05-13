@@ -3,6 +3,7 @@ package online.gater.controller;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -53,8 +54,7 @@ public class MainController {
 
     // login page
     @RequestMapping(value={"/login", "/register"})
-    public String loginPage(Model model, HttpSession httpSession, HttpServletRequest request) {
-		
+    public String loginPage(Model model, HttpSession httpSession, HttpServletRequest request) {		
     	if(Tools.isNotAuth(SecurityContextHolder.getContext().getAuthentication())) {
     		return "redirect:/";
     	}
